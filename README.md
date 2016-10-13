@@ -11,10 +11,10 @@ If you're having problems installing http-tester, try this
 > npm install http-tester --g --ignore-scripts
 
 ## How to use?
-> http-test /my/file/name http://my-url.com 2000 5000
+> http-test -l /my/log/file/name -u http://my-url.com -t 2000 -i 5000
 
-Args: 
-* 1: log file name
-* 2: url to request
-* 3: request timeout
-* 4: request interval
+Args:
+* -l: log file name [./LOG.txt]
+* -u: url to request [http://www.google.com]
+* -t: request timeout [2000]
+* -i: request interval [5000]

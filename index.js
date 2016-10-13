@@ -15,6 +15,7 @@ let _requestInterval;
 
 /**
  *
+ * @private
  */
 function _test() {
     return new Promise((resolve, reject) => {
@@ -31,12 +32,17 @@ function _test() {
 /**
  *
  * @param data
+ * @private
  */
 function _persist(data) {
     console.log(data);
     writeStream.write(data + os.EOL);
 }
 
+/**
+ *
+ * @private
+ */
 function _start() {
     interval = setInterval(() => {
         const promise = _test();
@@ -45,8 +51,15 @@ function _start() {
     }, _requestInterval);
 
     process.on('SIGINT', _stop);
+    process.on('unhandledRejection', err => {
+       // DO NOTHING
+    });
 }
 
+/**
+ *
+ * @private
+ */
 function _stop() {
     if (writeStream) {
         writeStream.end();
@@ -55,10 +68,10 @@ function _stop() {
 }
 
 module.exports = args => {
-    const logFile = args[0] || './LOG.txt';
-    _requestUrl = args[1] || 'http://www.google.com';
-    _requestTimeout = args[2] || 2000;
-    _requestInterval = args[3] || 5000;
+    const logFile = args.logFile || './LOG.txt';
+    _requestUrl = args.requestUrl || 'http://www.google.com';
+    _requestTimeout = args.requestTimeout || 2000;
+    _requestInterval = args.requestInterval || 5000;
 
     writeStream = fs.createWriteStream(logFile, {encoding: 'utf8', flags: 'a', mode: '0666'});
 
