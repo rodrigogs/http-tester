@@ -1,12 +1,14 @@
 {
   "name": "http-tester",
   "version": "0.0.1",
-  "private": false,
-  "author": "rodrigo.smscom@gmail.com",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
+  "license": "BSD-2-Clause",
+  "repository": "http-tester",
+  "author": {
+    "name": "Rodrigo Gomes da Silva",
+    "email": "rodrigo.smscom@gmail.com",
+    "web": "https://github.com/rodrigogs"
   },
+  "main": "index.js",
   "bin": {
     "http-test": "bin/http-test.js"
   },
@@ -14,5 +16,12 @@
     "bluebird": "^3.4.6",
     "moment": "^2.15.1",
     "request": "^2.75.0"
-  }
+  },
+  "keywords": [
+    "http",
+    "test",
+    "latency",
+    "ping",
+    "internet"
+  ]
 }
