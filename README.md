@@ -3,7 +3,7 @@
 Simple library and created in a hurry to test and log HTTP requests.
 
 ## How to install?
-> Have node.js installed
+Have node.js installed
 > npm install http-tester --g
 
 ## How to use?
