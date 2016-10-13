@@ -1,6 +1,6 @@
 # http-tester
 
-Simple library and created in a hurry to test and log HTTP requests.
+Simple library created in a hurry to test and log HTTP requests.
 
 ## How to install?
 Have node.js installed
