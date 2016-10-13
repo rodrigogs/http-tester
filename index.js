@@ -44,10 +44,28 @@ function _persist(data) {
  * @private
  */
 function _start() {
+    const errorTypes = {
+        'ENOTFOUND': {
+            type: 'D',
+            message: 'DNS Can\'t resolve host'
+        },
+        'ENOENT': {
+            type: 'N',
+            message: 'Network error'
+        },
+        'ETIMEDOUT': {
+            type: 'T',
+            message: 'Request timed out'
+        }
+    };
+
     interval = setInterval(() => {
         const promise = _test();
         promise.then(et => _persist(`#S ${moment().format('DD/MM/YYYY hh:mm:ss')}: Succeeded in ${et}ms`));
-        promise.catch(err => _persist(`#E ${moment().format('DD/MM/YYYY hh:mm:ss')}: ${err.message}`));
+        promise.catch(err => {
+            const error = errorTypes[err.code];
+            _persist(`#${error.type} ${moment().format('DD/MM/YYYY hh:mm:ss')}: ${error.message}: ${err.message}`);
+        });
     }, _requestInterval);
 
     process.on('SIGINT', _stop);
