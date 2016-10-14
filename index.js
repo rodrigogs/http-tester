@@ -9,6 +9,7 @@ const os = require('os');
 let writeStream;
 let interval;
 
+let _logFile;
 let _requestUrl;
 let _requestTimeout;
 let _requestInterval;
@@ -59,6 +60,7 @@ function _start() {
         }
     };
 
+    writeStream = fs.createWriteStream(_logFile, {encoding: 'utf8', flags: 'a', mode: '0666'});
     interval = setInterval(() => {
         const promise = _test();
         promise.then(et => _persist(`#S ${moment().format('DD/MM/YYYY hh:mm:ss')}: Succeeded in ${et}ms`));
@@ -67,11 +69,6 @@ function _start() {
             _persist(`#${error.type} ${moment().format('DD/MM/YYYY hh:mm:ss')}: ${error.message}: ${err.message}`);
         });
     }, _requestInterval);
-
-    process.on('SIGINT', _stop);
-    process.on('unhandledRejection', err => {
-       // DO NOTHING
-    });
 }
 
 /**
@@ -85,13 +82,16 @@ function _stop() {
     clearInterval(interval);
 }
 
+process.on('SIGINT', _stop);
+process.on('unhandledRejection', err => {
+   // DO NOTHING
+});
+
 module.exports = args => {
-    const logFile = args.logFile || './LOG.txt';
+    _logFile = args.logFile || './LOG.txt';
     _requestUrl = args.requestUrl || 'http://www.google.com';
     _requestTimeout = args.requestTimeout || 2000;
     _requestInterval = args.requestInterval || 5000;
-
-    writeStream = fs.createWriteStream(logFile, {encoding: 'utf8', flags: 'a', mode: '0666'});
 
     return {
         start: _start,
