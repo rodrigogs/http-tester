@@ -9,6 +9,7 @@
     "web": "https://github.com/rodrigogs"
   },
   "main": "index.js",
+  preferGlobal": true,
   "bin": {
     "http-test": "bin/http-test.js"
   },
