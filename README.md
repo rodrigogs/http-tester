@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/http-tester.svg)](https://badge.fury.io/js/http-tester)
 [![Code Climate](https://codeclimate.com/github/rodrigogs/http-tester/badges/gpa.svg)](https://codeclimate.com/github/rodrigogs/http-tester)
+[![npm](https://img.shields.io/npm/dt/http-tester.svg)](https://www.npmjs.com/package/http-tester)
 
 Simple Node.js library created in a hurry to test and log HTTP requests.
 
